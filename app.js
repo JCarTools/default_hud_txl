@@ -160,14 +160,16 @@ function test(){
 
 window.onAndroidEvent = function(type,data){
 
+    /*
       if(type == "GPSSignalQuality"){
         setGpsLevel(data.updateSignalQuality)
         return
       }
+      */
 
       if(type !== "hud") return;
       if(!panel||!hudTop) return;
-
+/*
 if ("ARAD" == data.hudSenderType){
       state.radar = data.aradarOn
           layout()
@@ -200,7 +202,9 @@ if ("ARAD" == data.hudSenderType){
       }
 }
 
-     if ("NAVI" == data.hudSenderType){
+ */
+
+     if ("NAVI" === data.hudSenderType){
         state.navi = data.naviOn
         layout()
       if(data.naviOn){
@@ -243,7 +247,7 @@ if ("ARAD" == data.hudSenderType){
     }
 
 
-    test();
+    //test();
 
 
 
