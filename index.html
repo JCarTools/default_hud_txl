@@ -84,14 +84,24 @@
         }
 
         .hud-inner{
-          display:flex;
-          align-items:center;
-          gap:22px;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            gap:6px;
+        }
+
+        .hud-top-row{
+            display:flex;
+            align-items:center;
+            gap:12px;
         }
 
         .hud-center{
-          display:flex;
-          flex-direction:column;
+            text-align:center;
+        }
+
+        .road{
+            display:none;
         }
         .hud-next{
   display:flex;
@@ -455,31 +465,21 @@
 <!-- ===== HUD ===== -->
 
 <div id="hudPanel" class="hud">
-
     <div class="hud-inner">
 
-        <svg class="turnIcon">
-            <use id="turnUse" href="#ico_straight"></use>
-        </svg>
+        <div class="hud-top-row">
+            <svg class="turnIcon">
+                <use id="turnUse" href="#ico_straight"></use>
+            </svg>
 
-        <div class="hud-center">
-            <div class="hud-next">
-                <div id="distance" class="distance">—</div>
-                <!--<div id="remainDist" class="distance"></div>-->
-            </div>
-            <div id="road" class="road"></div>
+            <div id="limit" class="limit">0</div>
         </div>
 
-        <div id="limit" class="limit">0</div>
-<!--
-        <svg id="radar" class="radar hidden">
-            <use href="#ico_radar"></use>
-        </svg>
-        -->
-
+        <div class="hud-center">
+            <div id="distance" class="distance">—</div>
+        </div>
 
     </div>
-
 </div>
 
 <script src="app.js"></script>
