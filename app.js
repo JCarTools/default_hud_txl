@@ -1,5 +1,8 @@
  window.addEventListener("DOMContentLoaded", ()=>{
 
+    const HUD_SCALE_MULTIPLIER = 1.5;
+    const HUD_STACK_GAP = 10;
+
     const map = {
       2:"#ico_left",
       3:"#ico_right",
@@ -18,11 +21,11 @@
 
     };
 
+  const gps = document.getElementById("gpsWidget")
   let gpsInitialized = false
 
   function setGpsLevel(value){
 
-      const gps = document.getElementById("gpsWidget")
 
       // если вообще нет значения → скрываем
       if(value === null || value === undefined){
@@ -82,6 +85,7 @@
     }
 
     const panel = document.getElementById("hudPanel");
+    const hudTopWrap = document.getElementById("hudTopWrap");
     const turnUse = document.getElementById("turnUse");
     const dist = document.getElementById("distance");
     //const remainDist = document.getElementById("remainDist");
@@ -95,6 +99,7 @@ const distanceTop = document.getElementById("distanceTop");
 const limitTop = document.getElementById("limitTop");
 
 function layout(){
+    const topRowVisible = state.radar || gpsInitialized;
 
     // visibility
     if(state.navi){
@@ -113,9 +118,9 @@ function layout(){
     }
 
     // push
-    if(state.radar){
-        const h = hudTop.offsetHeight
-        panel.style.setProperty("--pushY", (h + 10) + "px")
+    if(topRowVisible){
+        const h = hudTopWrap.offsetHeight
+        panel.style.setProperty("--pushY", ((h * HUD_SCALE_MULTIPLIER) + HUD_STACK_GAP) + "px")
         panel.style.setProperty("--baseTop","30px")
         panel.classList.add("both")
     }else{
@@ -127,10 +132,11 @@ function layout(){
 }
 
 function updateHudPush(){
+    const topRowVisible = hudTop.classList.contains("show") || gps.classList.contains("visible");
 
-    if(hudTop.classList.contains("show")){
-        const h = hudTop.offsetHeight
-        panel.style.setProperty("--pushY", (h + 10) + "px")
+    if(topRowVisible){
+        const h = hudTopWrap.offsetHeight
+        panel.style.setProperty("--pushY", ((h * HUD_SCALE_MULTIPLIER) + HUD_STACK_GAP) + "px")
     }else{
         panel.style.setProperty("--pushY", "0px")
     }
